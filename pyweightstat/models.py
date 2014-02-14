@@ -2,7 +2,8 @@ from sqlalchemy import (
     Column,
     Index,
     Integer,
-    Text,
+    Date,
+    Numeric,
     )
 
 from sqlalchemy.ext.declarative import declarative_base
@@ -17,15 +18,15 @@ from zope.sqlalchemy import ZopeTransactionExtension
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
+class Weight(Base):
+    __tablename__ = 'weights'
 
-class MyModel(Base):
-    __tablename__ = 'models'
     id = Column(Integer, primary_key=True)
-    name = Column(Text)
-    value = Column(Integer)
+    date = Column(Date)
+    weight = Column(Numeric(8, 1))
 
-    def __init__(self, name, value):
-        self.name = name
-        self.value = value
+    @classmethod
+    def get_latest(cls, num):
+        return DBSession.query(cls).order_by(cls.date).limit(num).all()
 
-Index('my_index', MyModel.name, unique=True, mysql_length=255)
+Index('idx_date', Weight.date)

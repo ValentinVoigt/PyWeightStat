@@ -79,7 +79,7 @@
 	<div id="center">
             <img src="${request.static_url('pyweightstat:static/img/scale.png')}">
 	    <p>
-		<b id="v" title="Stand: 14.2.1993">42,0</b>
+            <b id="v" title="Stand: ${latest[-1].date}">${latest[-1].weight}</b>
 		<span>kg</span>
 	    </p>
 	    <br>
@@ -113,14 +113,14 @@
 	var myNewChart = new Chart(ctx);
 
 	var data = {
-	    labels : ["1.", "2.", "3.", "4.", "5."],
+            labels : [${", ".join(["'%d.'" % i.date.day for i in latest])}],
 	    datasets : [
 	    {
 		fillColor : "rgba(151,187,205,0.5)",
 		strokeColor : "rgba(151,187,205,1)",
 		pointColor : "rgba(151,187,205,1)",
 		pointStrokeColor : "#fff",
-		data : [42, 43, 44, 42, 41]
+		data : [${", ".join(["%.1f" % i.weight for i in latest])}]
 	    }
 	]
     }
@@ -128,8 +128,8 @@
 	pointDotRadius: 3,
 	scaleOverride: true,
 	scaleSteps: 5,
-	scaleStepWidth: 1,
-	scaleStartValue: 40,
+        scaleStepWidth: ${max([(_max-_min)/5, 1])},
+        scaleStartValue: ${_min-1},
     });
     </script>
 </html>
