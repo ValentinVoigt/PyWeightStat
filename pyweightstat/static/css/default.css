@@ -1,0 +1,65 @@
+body {
+    font-family:sans-serif;
+    color:rgb(51, 51, 51);
+    margin:0;
+    padding:0;
+}
+
+div#center {
+    width:500px;
+
+    /*
+    Source: http://stackoverflow.com/questions/5412912/align-vertically-using-css-3
+    */
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);    
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+}
+
+div#center img {
+    width:150px;
+    float:left;
+}
+
+div#center p {
+    font-size:80px;
+    margin:0;
+    padding:25px 0 0 180px;
+}
+
+div#center b#v {
+    cursor: help;
+}
+
+div#center span {
+    font-size:0.5em;
+}
+
+div#center br {
+    clear:left;
+    margin:20px 0;
+}
+
+div#center #chart {
+    margin:25px 0 0 30px;
+}
+
+div.footer {
+    position:fixed;
+    padding:15px;
+    color:rgb(99, 99, 99);
+    bottom:0;
+}
+
+div#footer-right {
+    right:0;
+}
+
+div#footer-left {
+    left:0;
+}
+
