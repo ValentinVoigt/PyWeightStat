@@ -1,0 +1,7 @@
+/development.ini
+/production.ini
+/PyWeightStat.sqlite
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
