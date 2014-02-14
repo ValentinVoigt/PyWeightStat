@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html>
+    <head>
+	<link rel="icon" href="${request.static_url('pyweightstat:static/img/favicon.png')}" type="image/png">
+        <script src="${request.static_url('pyweightstat:static/js/chart.min.js')}"></script>
+        <title>PyWeightStat</title>
+	<style>
+	    body {
+		font-family:sans-serif;
+		color:rgb(51, 51, 51);
+		margin:0;
+		padding:0;
+	    }
+
+	    div#center {
+		width:500px;
+
+		/*
+		Source: http://stackoverflow.com/questions/5412912/align-vertically-using-css-3
+		*/
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		transform: translate(-50%, -50%);    
+		-webkit-transform: translate(-50%, -50%);
+		-moz-transform: translate(-50%, -50%);
+		-ms-transform: translate(-50%, -50%);
+	    }
+
+	    div#center img {
+		width:150px;
+		float:left;
+	    }
+
+	    div#center p {
+		font-size:80px;
+		margin:0;
+		padding:25px 0 0 180px;
+	    }
+
+	    div#center b#v {
+		cursor: help;
+	    }
+
+	    div#center span {
+		font-size:0.5em;
+	    }
+
+	    div#center br {
+		clear:left;
+		margin:20px 0;
+	    }
+
+	    div#center #chart {
+		margin:25px 0 0 30px;
+	    }
+
+	    div.footer {
+		position:fixed;
+		padding:15px;
+		color:rgb(99, 99, 99);
+		bottom:0;
+	    }
+	    div#footer-right {
+		right:0;
+	    }
+	    div#footer-left {
+		left:0;
+	    }
+	</style>
+    </head>
+    <body>
+	<div class="footer" id="footer-right">
+	    &copy; Valentin Voigt
+	</div>
+	<div class="footer" id="footer-left">
+	    chart by <a target="_blank" href="http://www.chartjs.org/">Chart.js</a>, icons by <a target="_blank" href="http://icons8.com/download-huge-windows8-set/">icons8</a>
+	</div>
+	<div id="center">
+            <img src="${request.static_url('pyweightstat:static/img/scale.png')}">
+	    <p>
+		<b id="v" title="Stand: 14.2.1993">42,0</b>
+		<span>kg</span>
+	    </p>
+	    <br>
+	    <img src="${request.static_url('pyweightstat:static/img/planner.png')}">
+	    <canvas id="chart" width="250" height="120"></canvas>
+	    <br>
+	</div>
+    </body>
+    <script>
+	function setVal(flt) {
+	    document.getElementById('v').innerHTML = flt.toFixed(1).replace('.', ',');
+	}
+	function getVal() {
+	    return document.getElementById('v').innerHTML.replace(',', '.');
+	}
+	function tick() {
+	    if (curr < dest) {
+		curr = curr + 2.0 + 2 * Math.random();
+		setVal(curr);
+
+		window.setTimeout(tick, 30);
+	    } else {
+		setVal(dest);
+	    }
+	}
+	var dest = parseFloat(getVal());
+	var curr = 0.0;
+	tick();
+
+	var ctx = document.getElementById("chart").getContext("2d");
+	var myNewChart = new Chart(ctx);
+
+	var data = {
+	    labels : ["1.", "2.", "3.", "4.", "5."],
+	    datasets : [
+	    {
+		fillColor : "rgba(151,187,205,0.5)",
+		strokeColor : "rgba(151,187,205,1)",
+		pointColor : "rgba(151,187,205,1)",
+		pointStrokeColor : "#fff",
+		data : [42, 43, 44, 42, 41]
+	    }
+	]
+    }
+    new Chart(ctx).Line(data, {
+	pointDotRadius: 3,
+	scaleOverride: true,
+	scaleSteps: 5,
+	scaleStepWidth: 1,
+	scaleStartValue: 40,
+    });
+    </script>
+</html>
