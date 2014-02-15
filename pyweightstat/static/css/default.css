@@ -7,17 +7,24 @@ body {
 
 div#center {
     width:500px;
+    margin:0 auto;
+	padding:5px 15px;
+}
 
-    /*
-    Source: http://stackoverflow.com/questions/5412912/align-vertically-using-css-3
-    */
-    position: absolute;
-    left: 50%;
-    top: 50%;
-    transform: translate(-50%, -50%);    
-    -webkit-transform: translate(-50%, -50%);
-    -moz-transform: translate(-50%, -50%);
-    -ms-transform: translate(-50%, -50%);
+@media (min-width:768px) {
+	div#center {
+		margin-top:50px;
+	}
+}
+@media (min-width:992px) {
+	div#center {
+		margin-top:100px;
+	}
+}
+@media (min-width:1200px) {
+	div#center {
+		margin-top:200px;
+	}
 }
 
 div#center img {
@@ -48,18 +55,19 @@ div#center #chart {
     margin:25px 0 0 30px;
 }
 
-div.footer {
-    position:fixed;
+div#footer {
+	width:100%;	
     padding:15px;
     color:rgb(99, 99, 99);
-    bottom:0;
+	text-align:right;
 }
 
-div#footer-right {
-    right:0;
+@media (min-width:1200px) and (min-height:620px),
+(min-width:992px) and (min-height:520px),
+(min-width:768px) and (min-height:470px),
+(max-width:767px) and (min-height:455px) {
+	div#footer {
+		position:fixed;
+		bottom:0;
+	}
 }
-
-div#footer-left {
-    left:0;
-}
-
