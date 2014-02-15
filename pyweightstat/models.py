@@ -15,6 +15,8 @@ from sqlalchemy.orm import (
 
 from zope.sqlalchemy import ZopeTransactionExtension
 
+from datetime import date
+
 DBSession = scoped_session(sessionmaker(extension=ZopeTransactionExtension()))
 Base = declarative_base()
 
@@ -22,7 +24,7 @@ class Weight(Base):
     __tablename__ = 'weights'
 
     id = Column(Integer, primary_key=True)
-    date = Column(Date)
+    date = Column(Date, default=date.today)
     weight = Column(Numeric(8, 1))
 
     @classmethod
