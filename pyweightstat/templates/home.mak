@@ -60,14 +60,14 @@
             var myNewChart = new Chart(ctx);
 
             var data = {
-                labels : [${", ".join(["'%d.'" % i.date.day for i in latest])}],
+                labels : [${", ".join(["'%d.'" % i.date.day for i in latest])|n}],
                 datasets : [
                     {
                         fillColor : "rgba(151,187,205,0.5)",
                         strokeColor : "rgba(151,187,205,1)",
                         pointColor : "rgba(151,187,205,1)",
                         pointStrokeColor : "#fff",
-                        data : [${", ".join(["%.1f" % i.weight for i in latest])}]
+                        data : [${", ".join(["%.1f" % i.weight for i in latest])|n}]
                     }
                 ]
             }

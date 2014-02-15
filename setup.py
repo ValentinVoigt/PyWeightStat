@@ -14,6 +14,8 @@ requires = [
     'pyramid_debugtoolbar',
     'zope.sqlalchemy',
     'waitress',
+    'markupsafe==0.15',
+    'pyramid_mako',
     ]
 
 setup(name='PyWeightStat',
