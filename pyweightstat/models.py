@@ -29,6 +29,6 @@ class Weight(Base):
 
     @classmethod
     def get_latest(cls, num):
-        return DBSession.query(cls).order_by(cls.date).limit(num).all()
+        return list(reversed(DBSession.query(cls).order_by(-cls.date).limit(num).all()))
 
 Index('idx_date', Weight.date)
