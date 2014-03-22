@@ -13,6 +13,7 @@
 </%block>
 
 <%block name="bottomInclude">
+    <%! from math import ceil %>
     <!-- <script src="${request.static_url('pyweightstat:static/js/jquery-2.1.0.min.js')}"></script>
     <script src="${request.static_url('pyweightstat:static/js/bootstrap-3.1.1.min.js')}"></script> -->
     <script src="${request.static_url('pyweightstat:static/js/chart.min.js')}"></script>
@@ -56,7 +57,7 @@
 	    pointDotRadius: 3,
 	    scaleOverride: true,
 	    scaleSteps: 5,
-	    scaleStepWidth: ${max([(_max-_min)/5, 1])},
+	    scaleStepWidth: ${ceil((_max-_min)/5.0)},
 	    scaleStartValue: ${_min-1},
 	});
     </script>
